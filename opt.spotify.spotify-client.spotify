@@ -1,0 +1,87 @@
+# Last Modified: Tue Oct 14 20:22:46 2014
+#include <tunables/global>
+
+/opt/spotify/spotify-client/spotify flags=(attach_disconnected) {
+  #include <abstractions/base>
+  #include <abstractions/X>
+  #include <abstractions/fonts>
+  #include <abstractions/kde>    # Trolltech
+  #include <abstractions/dbus>
+  #include <abstractions/dbus-session>
+  #include <abstractions/ibus>
+  #include <abstractions/dconf>
+  #include <abstractions/audio>
+  #include <abstractions/nameservice>
+
+  /opt/spotify/spotify-client/spotify mr,
+  /opt/spotify/spotify-client/Data/SpotifyHelper ixr,
+  /opt/spotify/** mr,
+
+  # Networking
+  network inet dgram,
+  network inet stream,
+  network inet6 dgram,
+  network inet6 stream,
+
+  # app-local
+  @{HOME}/.config/spotify/** rwk,
+  @{HOME}/.cache/spotify/ r,
+  @{HOME}/.cache/spotify/** rwk,
+  @{HOME}/.local/share/spotify/** rwk,
+
+  # home
+  @{HOME}/Music/ r,
+  @{HOME}/Music/** r,
+
+  # chromium?
+  /sys/bus/pci/devices/ r,
+
+  # chromium
+  @{PROC}/sys/kernel/shmmax r,
+  @{PROC}/[0-9]*/fd/ r,
+  @{PROC}/filesystems r,
+  @{PROC}/ r,
+  @{PROC}/[0-9]*/task/[0-9]*/stat r,
+  owner @{PROC}/[0-9]*/cmdline r,
+  owner @{PROC}/[0-9]*/io r,
+  @{PROC}/[0-9]*/smaps r,
+  owner @{PROC}/[0-9]*/stat r,
+  @{PROC}/[0-9]*/statm r,
+  owner @{PROC}/[0-9]*/status r,
+  owner @{PROC}/[0-9]*/oom_{,score_}adj w,
+
+  # Allow ptracing ourselves
+  ptrace (trace) peer=@{profile_name},
+
+  # Newer chromium needs these now
+  /etc/udev/udev.conf r,
+  /sys/devices/system/cpu/cpu*/cpufreq/cpuinfo_max_freq r,
+  /sys/devices/pci[0-9]*/**/class r,
+  /sys/devices/pci[0-9]*/**/device r,
+  /sys/devices/pci[0-9]*/**/irq r,
+  /sys/devices/pci[0-9]*/**/resource r,
+  /sys/devices/pci[0-9]*/**/vendor r,
+  /sys/devices/pci[0-9]*/**/removable r,
+  /sys/devices/pci[0-9]*/**/uevent r,
+  /sys/devices/pci[0-9]*/**/block/**/size r,
+  /sys/devices/virtual/block/**/removable r,
+  /sys/devices/virtual/block/**/uevent r,
+  /sys/devices/virtual/block/**/size r,
+  deny /run/udev/data/** r,
+
+  # other stuff we nee
+  owner @{HOME}/.pki/nssdb/* rwk,            #chromium?
+  owner @{PROC}/[0-9]*/auxv r,
+  owner @{PROC}/[0-9]*/task/ r,
+  /run/shm/* rw,
+  /etc/hosts r,
+  /lib/** mr,
+  /usr/** mr,
+  /etc/xdg/Trolltech.conf rk,
+  owner /run/user/*/dconf/     w,
+  owner /run/user/*/dconf/user rw,
+
+  #helpers
+  /usr/bin/xdg-open Uxr,
+
+}
