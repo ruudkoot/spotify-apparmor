@@ -38,6 +38,9 @@
   owner /run/user/*/dconf/     w,
   owner /run/user/*/dconf/user rw,
 
+  # Gnome
+  owner @{HOME}/.config/gtk-2.0/gtkfilechooser.ini r,
+
   # QT
   /etc/xdg/Trolltech.conf rk,
 
