@@ -20,10 +20,9 @@
   # Home folder
   owner @{HOME}/Music/ r,
   owner @{HOME}/Music/** r,
-
-  # TODO: may need create permissions
+  owner @{HOME}/.config/spotify/ rw,
   owner @{HOME}/.config/spotify/** rwk,
-  owner @{HOME}/.cache/spotify/ r,
+  owner @{HOME}/.cache/spotify/ rw,
   owner @{HOME}/.cache/spotify/** rwk,
   owner @{HOME}/.local/share/spotify/** rwk,
  
