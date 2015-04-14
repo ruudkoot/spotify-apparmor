@@ -1,8 +1,5 @@
 #include <tunables/global>
 
-# TODO: accept or deny /tmp/.ICE-unix/*
-# TODO: accept or deny @{HOME}/.mozilla/plugins/
-
 /opt/spotify/spotify-client/spotify flags=(attach_disconnected) {
   #include <abstractions/base>
   #include <abstractions/kde>
@@ -84,4 +81,8 @@
   /sys/devices/virtual/block/**/uevent r,
   /sys/devices/virtual/block/**/size r,
 
+  # 0.9.17
+  owner @{HOME}/.mozilla/plugins/ r,
+  owner @{HOME}/.mozilla/plugins/** r,
+  unix (receive, send) peer=(addr=@/tmp/.ICE-unix/*),
 }
