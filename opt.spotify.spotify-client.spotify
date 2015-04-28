@@ -84,5 +84,5 @@
   # 0.9.17
   owner @{HOME}/.mozilla/plugins/ r,
   owner @{HOME}/.mozilla/plugins/** r,
-  unix (receive, send) peer=(addr=@/tmp/.ICE-unix/*),
+  unix (receive, send, connect) peer=(addr=@/tmp/.ICE-unix/*),
 }
