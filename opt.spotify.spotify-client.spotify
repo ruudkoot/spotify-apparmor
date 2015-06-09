@@ -26,7 +26,9 @@
   owner @{HOME}/.local/share/spotify/ rw,
   owner @{HOME}/.local/share/spotify/** rwk,
   owner @{HOME}/.local/share/fonts/ r,
-  owner @{HOME}/.local/share/fonts/* r,
+  owner @{HOME}/.local/share/fonts/** r,
+  owner @{HOME}/.mozilla/plugins/ r,
+  owner @{HOME}/.mozilla/plugins/** r,
  
   # Application and libraries
   /opt/spotify/spotify-client/** mr,
@@ -85,8 +87,6 @@
   /sys/devices/virtual/block/**/uevent r,
   /sys/devices/virtual/block/**/size r,
 
-  # 0.9.17
-  owner @{HOME}/.mozilla/plugins/ r,
-  owner @{HOME}/.mozilla/plugins/** r,
+  # NOTE: comment out the following line on Ubuntu 14.04 LTS and older.
   unix (receive, send, connect) peer=(addr=@/tmp/.ICE-unix/*),
 }
